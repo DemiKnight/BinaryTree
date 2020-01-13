@@ -62,6 +62,12 @@
       <LastGenOutput>SampleText.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BinaryTreeFinal\BinaryTreeFinal.csproj">
+      <Project>{08d8dd42-e666-4b22-83b4-f8b3939a534c}</Project>
+      <Name>BinaryTreeFinal</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

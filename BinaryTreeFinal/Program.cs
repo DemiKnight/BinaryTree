@@ -7,8 +7,8 @@ namespace BinaryTreeFinal
         public static void Main(string[] args)
         {
             BinaryTree<int> TestTree = new BinaryTree<int>(1);
-            TestTree.AddItem(2);
-            TestTree.AddItem(3);
+            TestTree.InsertItem(2);
+            TestTree.InsertItem(3);
             
             Console.WriteLine("Hello");
         }

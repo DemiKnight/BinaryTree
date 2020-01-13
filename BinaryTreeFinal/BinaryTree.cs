@@ -6,18 +6,6 @@ namespace BinaryTreeFinal
     {
         protected Node<T> root;
 
-        protected void AddToNode(ref Node<T> newNode, T data)
-        {
-            if (newNode == null)
-            {
-                newNode = new Node<T>(data);
-            }
-            else
-            {
-                newNode.Data = data;
-            }
-        }
-        
         public BinaryTree(Node<T> root)
         {
             this.root = root;
@@ -28,24 +16,72 @@ namespace BinaryTreeFinal
             this.root = new Node<T>(data);
         }
 
-        public virtual void AddItem(T newData)
+        public int Count
         {
-            AddItem(ref root, newData);
-        }
-
-        protected virtual void AddItem(ref Node<T> selectedNode,T newData)
-        {
-            if(selectedNode.Left == null) selectedNode.Left = new Node<T>(newData); 
-            else if(selectedNode.Right == null) selectedNode.Right = new Node<T>(newData);
-            else
-            {
-                AddItem(ref selectedNode.Left,newData);
-            }
-        }
-
-        public int NUmOfBranches
-        { //TODO
             get => 0;
+        }
+
+        public int Height
+        {
+            get => 0;
+        }
+
+        public bool Contains(T item)
+        {
+            throw new NotImplementedException();
+            return false;
+        }
+        
+        public virtual void Copy(BinaryTree<T> tree)
+        {
+            throw new NotImplementedException();
+            _copy(ref root, tree.root);
+        }
+
+        protected virtual void _copy(ref Node<T> tree, Node<T> tree2)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public virtual void InsertItem(T item)
+        {
+            throw new NotImplementedException();
+            _insertItem(item, ref root);
+        }
+
+        protected virtual void _insertItem(T item, ref Node<T> tree)
+        {
+            throw new NotImplementedException();
+            
+            
+        }
+
+        public virtual void RemoveItem(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Equals(object obj)
+        {
+            //todo implement this.
+            
+            throw new NotImplementedException();
+            return false;
+        }
+        
+        public bool Equals(BinaryTree<T> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void CopyTo(ref BinaryTree<T> tree)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool SubTree(BinaryTree<T> tree)
+        {
+            throw new NotImplementedException();
         }
         
         
