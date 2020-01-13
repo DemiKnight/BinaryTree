@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            It was one January morning, very early, a pinching, frosty morning. The cove all grey with hoar frost,
+            the ripple lapping softly on the stones, the sun still low and only touching the hilltops and shining far to
+            seaward.
+            The captain had risen earlier than usual and set out down the beach, his cutlass swinging under the broad
+            skirts of the old blue coat, his brass telescope under his arm, his hat tilted back upon his head. I remember
+            his breath hanging like smoke in his wake as he strode off, and the last sound I heard of him as he turned
+            the big rock was a loud snort of indignation, as though his mind was still running upon Dr Livesey.
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+</root>
