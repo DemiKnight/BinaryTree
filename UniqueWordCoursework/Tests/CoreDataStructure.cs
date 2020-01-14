@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using BinaryTreeFinal;
 using NUnit.Framework;
 
@@ -8,38 +9,35 @@ namespace UniqueWordCoursework.Tests
     [TestFixture]
     public class CoreDataStructure
     {
-        private BinaryTree<int> test;
+        private BinaryTree<int> test = new BinaryTree<int>(1);
 
-        public CoreDataStructure()
+        [Test]
+        public void BTInsertValues()
         {
             test.InsertItem(2);
             test.InsertItem(3);
             test.InsertItem(4);
             test.InsertItem(5);
+            
+            // Assert.Contains();
         }
 
-        // [TestCaseSource(typeof(TestData), "AddData")]
-        public bool checkAdd()
+        [Test]
+        public void BSContainsBasic()
         {
-            BinaryTree<int> test = new BinaryTree<int>(1);
-            // Assert.That(test, Equals() );
-            
-            
-            return true;
+            Assert.Contains(test.GetValues(), new int[] {2,3, 4, 5});
         }
-        
-    }
 
-    public class TestData
-    {
-        public static IEnumerable AddData
+        [Test]
+        public void BSRemoveItemAnyOrder()
         {
-            get
-            {
-                yield return new TestCaseData(2).Returns(2);
-            }
+            
+        }
+
+        [Test]
+        public void BSRemoveItemSpecificOrder()
+        {
+            
         }
     }
-    
-    
 }

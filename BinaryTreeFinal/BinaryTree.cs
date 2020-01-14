@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BinaryTreeFinal
 {
@@ -28,8 +29,12 @@ namespace BinaryTreeFinal
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
-            return false;
+            return _contains(item, root);
+        }
+
+        protected bool _contains(T search, Node<T> rootElement)
+        {
+            return rootElement.Data.Equals(search) || (_contains(search, root.Left) || _contains(search, root.Right));
         }
         
         public virtual void Copy(BinaryTree<T> tree)
@@ -82,6 +87,30 @@ namespace BinaryTreeFinal
         public virtual bool SubTree(BinaryTree<T> tree)
         {
             throw new NotImplementedException();
+        }
+
+        public T[] GetValues()
+        {
+            List<T> returnList = new List<T>();
+
+            _getValues(ref returnList, root);
+
+            return returnList.ToArray();
+        }
+
+        private void _getValues(ref List<T> returnList, Node<T> rootNode) 
+        {
+            returnList.Add(rootNode.Data);
+            _getValues(ref returnList, rootNode.Left);
+            _getValues(ref returnList, rootNode.Right);
+        }
+
+        /**
+         * 
+         */
+        public override string ToString()
+        {
+            return GetValues().ToString();
         }
         
         

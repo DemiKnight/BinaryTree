@@ -6,11 +6,14 @@ namespace BinaryTreeFinal
     {
         public static void Main(string[] args)
         {
-            BinaryTree<int> TestTree = new BinaryTree<int>(1);
-            TestTree.InsertItem(2);
-            TestTree.InsertItem(3);
+            BinaryTree<int> test = new BinaryTree<int>(1);
+            
+            
             
             Console.WriteLine("Hello");
         }
+
+
+
     }
 }
