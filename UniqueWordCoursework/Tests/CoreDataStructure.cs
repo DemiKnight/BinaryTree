@@ -18,8 +18,6 @@ namespace UniqueWordCoursework.Tests
             test.InsertItem(3);
             test.InsertItem(4);
             test.InsertItem(5);
-            
-            // Assert.Contains();
         }
 
         [Test]
