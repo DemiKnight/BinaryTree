@@ -4,19 +4,26 @@ using NUnit.Framework;
 
 namespace BinaryTreeFinal.Tests
 {
-    class DummyObject <T> where T:IComparable<T>
+    class DummyObject : IComparable<int>, IComparable<DummyObject>
     {
-        private T infoInt;
+        private int infoInt;
     
-        public T InfoInt
+        public int InfoInt
         {
             get => infoInt;
             set => infoInt = value;
         }
-    
-        public override bool Equals(object obj)
+
+        public int CompareTo(int other)
         {
-            return obj!=null && (DummyObject<> obj).infoInt.Equals(infoInt);
+            return ( infoInt == other ? 0 : (infoInt < other ? -1 : 1));
+        }
+
+        public int CompareTo(DummyObject other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            return infoInt.CompareTo(other.infoInt);
         }
     }
     
@@ -38,7 +45,7 @@ namespace BinaryTreeFinal.Tests
             Assert.AreEqual(testInt, testNodeInt.Data);
 
             Node<string> testNodeStr = new Node<string>(testStr);
-            Assert.AreEqual(testStr, testNodeInt.Data);
+            Assert.AreEqual(testStr, testNodeStr.Data);
             
             // Node<LinkedList<>> testNodeObj = new Node<LinkedList<>>(testObj);
             // Assert.AreEqual(testNodeObj, testNodeObj.Data);
