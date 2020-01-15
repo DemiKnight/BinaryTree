@@ -7,7 +7,8 @@ namespace BinaryTreeFinal
     {
         private T data;
         private Node<T> right, left;
-
+        
+        
         public Node(T comparable)
         {
             this.data = comparable;
@@ -36,9 +37,28 @@ namespace BinaryTreeFinal
             return Equals((Node<T>) obj);
         }
 
+        public void test(TraversingMethod method, Delegate callBack)
+        {
+            switch (method)
+            {
+                case TraversingMethod.InOrder => callBack();
+            }   
+        }
+        
+        
         public override int GetHashCode()
         {
             return EqualityComparer<T>.Default.GetHashCode(data);
+        }
+
+        protected string _toString()
+        {
+            return left._toString() + " " + data.ToString() + Right._toString() + " ";
+        }
+
+        public override string ToString()
+        {
+            return _toString();
         }
     }
 }

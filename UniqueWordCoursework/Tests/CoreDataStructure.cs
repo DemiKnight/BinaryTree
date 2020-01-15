@@ -11,6 +11,13 @@ namespace UniqueWordCoursework.Tests
     {
         private BinaryTree<int> test = new BinaryTree<int>(1);
 
+        [SetUp]
+        public void PreTest()
+        {
+        }
+        
+        
+        
         [Test]
         public void BTInsertValues()
         {
@@ -34,6 +41,30 @@ namespace UniqueWordCoursework.Tests
 
         [Test]
         public void BSRemoveItemSpecificOrder()
+        {
+            
+        }
+
+        [Test]
+        public void BSCountCheck()
+        {
+            
+        }
+
+        [Test]
+        public void BSHeightCheck()
+        {
+            
+        }
+
+        [Test]
+        public void BSShallowCopyCheck()
+        {
+            
+        }
+
+        [Test]
+        public void BSEqualityCheck()
         {
             
         }
