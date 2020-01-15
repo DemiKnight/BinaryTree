@@ -37,15 +37,14 @@ namespace BinaryTreeFinal
             return Equals((Node<T>) obj);
         }
 
-        public void test(TraversingMethod method, Delegate callBack)
-        {
-            // switch (method)
-            // {
-            //     case TraversingMethod.InOrder => callBack();
-            // }   
-        }
-        
-        
+        // public void test(TraversingMethod method, Delegate callBack)
+        // {
+        //     // switch (method)
+        //     // {
+        //     //     case TraversingMethod.InOrder => callBack();
+        //     // }   
+        // }
+
         public override int GetHashCode()
         {
             return EqualityComparer<T>.Default.GetHashCode(data);
@@ -53,7 +52,7 @@ namespace BinaryTreeFinal
 
         protected string _toString()
         {
-            return left._toString() + " " + data.ToString() + Right._toString() + " ";
+            return (left != null ? left._toString() : "") + " " + data.ToString() + (right != null ? Right._toString() : "") + " ";
         }
 
         public override string ToString()
