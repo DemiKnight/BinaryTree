@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Linq;
-using BinaryTreeFinal;
 using NUnit.Framework;
 
-namespace UniqueWordCoursework.Tests
+namespace BinaryTreeFinal.Tests
 {
 
     [TestFixture]

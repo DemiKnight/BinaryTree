@@ -45,18 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Location.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\CoreDataStructure.cs" />
-    <Compile Include="Tests\NodeDataTest.cs" />
+    <Compile Include="Source\Location.cs" />
+    <Compile Include="Source\Word.cs" />
     <Compile Include="Tests\SampleText.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SampleText.resx</DependentUpon>
     </Compile>
     <Compile Include="Tests\UniqueWord.cs" />
-    <Compile Include="Word.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Tests\SampleText.resx">

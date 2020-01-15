@@ -1,8 +1,7 @@
 using System;
-using BinaryTreeFinal;
 using NUnit.Framework;
 
-namespace UniqueWordCoursework.Tests
+namespace BinaryTreeFinal.Tests
 {
     [TestFixture]
     public class NodeDataTest

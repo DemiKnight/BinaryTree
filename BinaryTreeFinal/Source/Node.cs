@@ -39,10 +39,10 @@ namespace BinaryTreeFinal
 
         public void test(TraversingMethod method, Delegate callBack)
         {
-            switch (method)
-            {
-                case TraversingMethod.InOrder => callBack();
-            }   
+            // switch (method)
+            // {
+            //     case TraversingMethod.InOrder => callBack();
+            // }   
         }
         
         
