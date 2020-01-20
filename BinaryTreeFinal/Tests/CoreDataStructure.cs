@@ -39,11 +39,30 @@ namespace BinaryTreeFinal.Tests
         }
 
         [Test]
-        public void BSRemoveItemAnyOrder()
+        public void BSRemoveChildlessChild()
         {
-            
+            test.RemoveItem(4);
+            Assert.Contains(test.GetValues(), new int[] {1,2,3}, "Remove child without children");
+            Assert.AreEqual(test.ToString(), "1 2 3", "Remove child without children, with correct order.");
+            // test.RemoveItem(5);
+        }
+        
+        [Test]
+        public void BSRemoveChildWithChildren()
+        {
+            test.RemoveItem(2);
+            Assert.Contains(test.GetValues(), new int[] {1,3,4,5}, "Remove child with children");
+            Assert.AreEqual(test.ToString(),  "1 3 4", "Remove child with children, correct order");
         }
 
+        [Test]
+        public void BSRemoveRoot()
+        {
+            test.RemoveItem(1);
+            Assert.Contains(test.GetValues(), new int[] {2,3,4,5}, "Remove Root Element");
+            Assert.AreEqual(test.ToString(),  "2 3 4", "Remove root, correct order");
+        }
+        
         [Test]
         public void BSRemoveItemSpecificOrder()
         {
@@ -61,7 +80,11 @@ namespace BinaryTreeFinal.Tests
         [Test]
         public void BSHeightCheck()
         {
-            
+            Assert.AreEqual(test.Height, 3, "Height Test");
+            test.InsertItem(5);
+            Assert.AreEqual(test.Height, 3, "Height Test, after insertion");
+            test.InsertItem(6);
+            Assert.AreEqual(test.Height, 4, "Height Test, after insertion x2");
         }
 
         [Test]

@@ -4,6 +4,16 @@ using System.Security.Permissions;
 
 namespace BinaryTreeFinal
 {
+    struct Utilites
+    {
+        static void Swap<T>( ref T originalPlace, ref T targetPlace)
+        {
+            T tempVal = originalPlace;
+            targetPlace = originalPlace;
+            targetPlace = tempVal;
+        }
+    }
+
     public class BinaryTree <T> where T:IComparable<T>, IComparable
     {
         protected Node<T> root;
