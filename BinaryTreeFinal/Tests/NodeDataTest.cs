@@ -106,14 +106,5 @@ namespace BinaryTreeFinal.Tests
             Assert.IsTrue(sameNode.Equals(currentTestNode));
         }
         
-        
-        
-        
-        // [Test]
-        // public void ChildNodeData()
-        // {
-        //     
-        // }
-        
     }
 }
