@@ -1,15 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Permissions;
 
 namespace BinaryTreeFinal
 {
     public class BinaryTree <T> where T:IComparable<T>, IComparable
     {
         protected Node<T> root;
+        protected int _numberOfNodes = 0;
+        protected int _heightOfNodes = 0;
 
         public BinaryTree(Node<T> root)
         {
             this.root = root;
+            _count(ref _numberOfNodes, ref root);
         }
 
         public BinaryTree(T data)
@@ -17,9 +21,23 @@ namespace BinaryTreeFinal
             this.root = new Node<T>(data);
         }
 
+        private void _count(ref int returnVal, ref Node<T> nextNode)
+        {
+            returnVal += 1;
+
+            if (nextNode.Left != null)  _count(ref returnVal, ref nextNode.Left);
+            if (nextNode.Right != null) _count(ref returnVal, ref nextNode.Right);
+        }
+
+        private void _height(ref int returnVal, ref Node<T> nextNode)
+        {
+
+        }
+
         public int Count
         {
-            get => 0;
+
+            get => _numberOfNodes;
         }
 
         public int Height

@@ -32,6 +32,9 @@ namespace BinaryTreeFinal.Tests
     {
         private static Random rnd = new Random();
 
+        /**
+         * Node that contains
+         */
         private Node<int> currentTestNode;
         
         private int testInt = rnd.Next(10000);
@@ -47,9 +50,6 @@ namespace BinaryTreeFinal.Tests
             Node<string> testNodeStr = new Node<string>(testStr);
             Assert.AreEqual(testStr, testNodeStr.Data);
             
-            // Node<LinkedList<>> testNodeObj = new Node<LinkedList<>>(testObj);
-            // Assert.AreEqual(testNodeObj, testNodeObj.Data);
-            // Assert.AreEqual(testObj.InfoInt, testNodeObj.Data.InfoInt );
         }
 
         /**
