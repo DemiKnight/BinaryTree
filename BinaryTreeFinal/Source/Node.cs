@@ -59,5 +59,10 @@ namespace BinaryTreeFinal
         {
             return _toString();
         }
+
+        public bool Childless
+        {
+            get => left == null && right == null;
+        }
     }
 }

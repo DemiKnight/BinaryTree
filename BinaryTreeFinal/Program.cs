@@ -6,9 +6,16 @@ namespace BinaryTreeFinal
     {
         public static void Main(string[] args)
         {
-            BinaryTree<int> test = new BinaryTree<int>(1);
+            Node < int > root= new Node<int>(1);
+            root.Left = new Node<int>(2);
+            root.Right = new Node<int>(3);
+            root.Left.Left = new Node<int>(4);
+            root.Right.Right = new Node<int>(4);
+            BinaryTree<int> test = new BinaryTree<int>( root );
+
             
-            
+               
+            Console.WriteLine();
             
             Console.WriteLine("Hello");
         }

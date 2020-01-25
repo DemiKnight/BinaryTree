@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Security.Permissions;
 
 namespace BinaryTreeFinal
@@ -8,14 +9,25 @@ namespace BinaryTreeFinal
     {
         static void Swap<T>( ref T originalPlace, ref T targetPlace)
         {
-            T tempVal = originalPlace;
-            targetPlace = originalPlace;
-            targetPlace = tempVal;
+            // T tempVal = originalPlace;
+            // targetPlace = originalPlace;
+            // targetPlace = tempVal;
+
+            (originalPlace, targetPlace) = (targetPlace, originalPlace);
         }
     }
 
     public class BinaryTree <T> where T:IComparable<T>, IComparable
     {
+        public enum RETURN_Code
+        {
+            Sucessful,
+            NotFound,
+            UnableToInsert,
+            OtherError,
+            UnableToRemove
+        }
+        
         protected Node<T> root;
         protected int _numberOfNodes = 0;
         protected int _heightOfNodes = 0;
@@ -41,18 +53,34 @@ namespace BinaryTreeFinal
 
         private void _height(ref int returnVal, ref Node<T> nextNode)
         {
+            returnVal++;
+            
+            int rightHeight = 0;
+            int leftHeight = 0;
+            
+            if (nextNode.Left != null) _height(ref leftHeight, ref nextNode.Left);
+            if (nextNode.Right != null) _height(ref rightHeight, ref nextNode.Right);
 
+            returnVal += (leftHeight > rightHeight ? leftHeight : rightHeight);
         }
 
         public int Count
         {
-
             get => _numberOfNodes;
         }
 
+        protected int _Height()
+        {
+            int returnVal = 0;
+            
+            _height(ref returnVal, ref root);
+            
+            return returnVal;
+        }
+        
         public int Height
         {
-            get => 0;
+            get => _Height();
         }
 
         public bool Contains(T item)
@@ -73,10 +101,11 @@ namespace BinaryTreeFinal
 
         protected virtual void _copy(ref Node<T> tree, Node<T> tree2)
         {
+            
             throw new NotImplementedException();
         }
         
-        public virtual void InsertItem(T item)
+        public virtual RETURN_Code InsertItem(T item)
         {
             throw new NotImplementedException();
             _insertItem(item, ref root);
@@ -89,22 +118,42 @@ namespace BinaryTreeFinal
             
         }
 
-        public virtual void RemoveItem(T item)
+
+        protected virtual RETURN_Code _returnItem(ref Node<T> selectedNode, T removalItem)
         {
-            throw new NotImplementedException();
+
+            return RETURN_Code.NotFound;
+        }
+        
+        public virtual RETURN_Code RemoveItem(T item)
+        {
+            return _returnItem(ref root, item);
+        }
+
+        protected virtual bool _equals(ref Node<T> rhs, ref Node<T> lhs)
+        {
+            if (rhs.Data.Equals(lhs.Data))
+            {
+                if (rhs.Childless && lhs.Childless) return true;
+                
+                return _equals(ref lhs.Left, ref rhs.Left) && _equals(ref lhs.Right, ref rhs.Right) ;
+
+            }
+            return false;
         }
 
         public override bool Equals(object obj)
         {
-            //todo implement this.
-            
-            throw new NotImplementedException();
-            return false;
+            if (!(obj is BinaryTree<T>) || (obj as BinaryTree<T>).Count != this.Count) return false;
+
+            BinaryTree<T> temp = obj as BinaryTree<T>;
+
+            return (_equals(ref root, ref (obj as BinaryTree<T>).root));
         }
         
         public bool Equals(BinaryTree<T> tree)
         {
-            throw new NotImplementedException();
+            return Equals(tree);
         }
 
         public virtual void CopyTo(ref BinaryTree<T> tree)

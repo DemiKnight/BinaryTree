@@ -12,13 +12,13 @@ namespace BinaryTreeFinal
         {
         }
 
-        public override void RemoveItem(T item)
+        public override RETURN_Code RemoveItem(T item)
         {
             throw new NotImplementedException();
             base.RemoveItem(item);
         }
 
-        public override void InsertItem(T item)
+        public override RETURN_Code InsertItem(T item)
         {
             throw new NotImplementedException();
             base.InsertItem(item);

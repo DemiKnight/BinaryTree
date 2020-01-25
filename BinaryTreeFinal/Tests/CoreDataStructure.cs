@@ -26,10 +26,14 @@ namespace BinaryTreeFinal.Tests
         [Test]
         public void BTInsertValues()
         {
-            test.InsertItem(2);
-            test.InsertItem(3);
-            test.InsertItem(4);
+            
+            // test.InsertItem(2);
+            // test.InsertItem(3);
+            // test.InsertItem(4);
             test.InsertItem(5);
+            test.InsertItem(6);
+            Assert.Contains(test.GetValues(), new int[] {1, 2, 3, 4, 5, 6 });
+            
         }
 
         [Test]

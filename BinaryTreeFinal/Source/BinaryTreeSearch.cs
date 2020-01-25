@@ -13,9 +13,9 @@ namespace BinaryTreeFinal
         {
         }
 
-        public override void InsertItem(T item)
+        public override RETURN_Code InsertItem(T item)
         {
-            base.InsertItem(item);
+            return base.InsertItem(item);
         }
 
         protected override void _insertItem(T item, ref Node<T> tree)
