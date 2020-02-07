@@ -79,27 +79,14 @@ namespace BinaryTreeFinal
             }
             else
             {
-                //Case 3 : 
+                //Case 3 :  Two children
 
                 nodeToRemove = MergeTrees(ref nodeToRemove.Left, ref nodeToRemove.Right);
 
-                return RETURN_Code.Sucessful;    
-                // if (nodeToRemove.Left.Data.CompareTo(nodeToRemove.Right.Data) == -1)
-                // {
-                //     nodeToRemove = nodeToRemove.Left;
-                //     return RETURN_Code.Sucessful;
-                // }
-                // else
-                // {
-                //     nodeToRemove = nodeToRemove.Right;
-                //     return RETURN_Code.Sucessful;
-                // }
-                // return RETURN_Code.UnableToRemove;
+                return RETURN_Code.Sucessful;
             }
         }
         
-        
-
         protected override RETURN_Code _removeItem(T item, ref Node<T> tree)
         {
             if (tree.Data.CompareTo(item) == 0)

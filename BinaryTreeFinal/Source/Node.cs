@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
 
 namespace BinaryTreeFinal
 {
@@ -77,6 +78,38 @@ namespace BinaryTreeFinal
         public int NumberOfChildren
         {
             get => _numberOfChildren();
+        }
+
+        private void _lowestValue( ref  Node<T> selNode, ref Node<T> largest)
+        {
+            T tempStore = (largest == null ? selNode.data : largest.data);
+
+            if (tempStore.CompareTo(selNode.data) == -1)
+                largest = selNode;
+
+            if (selNode.left != null) _lowestValue(ref selNode.left, ref largest);
+            if (selNode.right != null) _lowestValue(ref selNode.Right, ref largest);
+        }
+
+        protected ref Node<T> GetLoestValue()
+        {
+            Node<T> tempData = this;
+
+            if (this.left != null) _lowestValue(ref left, ref tempData);
+            if (this.right != null) _lowestValue(ref Right, ref tempData);
+            
+            //TODO Sort out this shit
+            return tempData;
+        }
+        
+        public ref Node<T> LowestValue
+        {
+            get => ref left;
+        }
+
+        public ref Node<T> LargestValue
+        {
+            get => ref right;
         }
         
         
