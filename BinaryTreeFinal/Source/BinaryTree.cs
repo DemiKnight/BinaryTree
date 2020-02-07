@@ -25,7 +25,8 @@ namespace BinaryTreeFinal
             NotFound,
             UnableToInsert,
             OtherError,
-            UnableToRemove
+            UnableToRemove,
+            ValueAlreadyPresent
         }
         
         protected Node<T> root;
@@ -83,6 +84,8 @@ namespace BinaryTreeFinal
             get => _Height();
         }
 
+        
+
         public bool Contains(T item)
         {
             return _contains(item, root);
@@ -95,14 +98,19 @@ namespace BinaryTreeFinal
         
         public virtual void Copy(BinaryTree<T> tree)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
             _copy(ref root, tree.root);
         }
 
-        protected virtual void _copy(ref Node<T> tree, Node<T> tree2)
+        protected virtual void _copy(ref Node<T> target, Node<T> source)
         {
-            
-            throw new NotImplementedException();
+            if (source != null)
+            {
+                target = new Node<T>(source.Data);
+                
+                _copy(ref target.Left, source.Left);
+                _copy(ref target.Right, source.Right);
+            }
         }
         
         public virtual RETURN_Code InsertItem(T item)
@@ -111,7 +119,7 @@ namespace BinaryTreeFinal
             _insertItem(item, ref root);
         }
 
-        protected virtual void _insertItem(T item, ref Node<T> tree)
+        protected virtual RETURN_Code _insertItem(T item, ref Node<T> tree)
         {
             throw new NotImplementedException();
             
@@ -124,10 +132,16 @@ namespace BinaryTreeFinal
 
             return RETURN_Code.NotFound;
         }
+
+        protected virtual RETURN_Code _removeItem(T item, ref Node<T> tree)
+        {
+            
+            return RETURN_Code.NotFound;
+        }
         
         public virtual RETURN_Code RemoveItem(T item)
         {
-            return _returnItem(ref root, item);
+            return _removeItem(item, ref root);
         }
 
         protected virtual bool _equals(ref Node<T> rhs, ref Node<T> lhs)
@@ -189,6 +203,7 @@ namespace BinaryTreeFinal
         {
             return GetValues().ToString();
         }
+
         
         
     }

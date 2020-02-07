@@ -24,7 +24,7 @@ namespace BinaryTreeFinal
             base.InsertItem(item);
         }
 
-        protected override void _insertItem(T item, ref Node<T> tree)
+        protected override RETURN_Code _insertItem(T item, ref Node<T> tree)
         {
             throw new NotImplementedException();
             base._insertItem(item, ref tree);

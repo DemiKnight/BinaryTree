@@ -52,7 +52,7 @@ namespace BinaryTreeFinal
 
         protected string _toString()
         {
-            return (left != null ? left._toString() : "") + " " + data.ToString() + (right != null ? Right._toString() : "") + " ";
+            return (left != null ? left._toString() : "") + " " + data.ToString() + " " + (right != null ? Right._toString() : "");
         }
 
         public override string ToString()
@@ -64,5 +64,21 @@ namespace BinaryTreeFinal
         {
             get => left == null && right == null;
         }
+
+        private int _numberOfChildren()
+        {
+            int returnVal = 0;
+
+            if (left != null) returnVal++;
+            if (right != null) returnVal++;
+
+            return returnVal;
+        }
+        public int NumberOfChildren
+        {
+            get => _numberOfChildren();
+        }
+        
+        
     }
 }
