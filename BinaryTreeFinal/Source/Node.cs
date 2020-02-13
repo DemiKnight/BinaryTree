@@ -80,36 +80,56 @@ namespace BinaryTreeFinal
             get => _numberOfChildren();
         }
 
-        private void _lowestValue( ref  Node<T> selNode, ref Node<T> largest)
+        private ref Node<T> _lowestValue( out  Node<T> selNode, Node<T> smallest)
         {
-            T tempStore = (largest == null ? selNode.data : largest.data);
-
-            if (tempStore.CompareTo(selNode.data) == -1)
-                largest = selNode;
-
-            if (selNode.left != null) _lowestValue(ref selNode.left, ref largest);
-            if (selNode.right != null) _lowestValue(ref selNode.Right, ref largest);
+            throw new NotImplementedException();
+            //
+            // T tempStore = (largest == null ? selNode.data : largest.data);
+            //
+            // if (tempStore.CompareTo(selNode.data) == -1)
+            //     largest = selNode;
+            //
+            // if (selNode.right != null) _lowestValue(ref selNode.Right, ref largest);
+            // if (selNode.left == null && selNode.right == null)
+            // {
+            //     return ref largest;
+            // }
+            //
+            // return ref left;
         }
 
-        protected ref Node<T> GetLoestValue()
+        private ref Node<T> _highestValue(ref Node<T> selNode, ref Node<T> largest)
         {
-            Node<T> tempData = this;
 
-            if (this.left != null) _lowestValue(ref left, ref tempData);
-            if (this.right != null) _lowestValue(ref Right, ref tempData);
+            throw new NotImplementedException();
+        }
+
+        protected ref Node<T> GetHighestValue()
+        {
+            throw new NotImplementedException();
             
-            //TODO Sort out this shit
-            return tempData;
+        }
+        
+        protected ref Node<T> GetLowestValue()
+        {
+            throw new NotImplementedException();
+            // ref Node<T> tempData;
+            //
+            // if (this.left != null) tempData = _lowestValue(out left);
+            // if (this.right != null) _lowestValue(ref Right);
+            //
+            // //TODO Sort out this shit
+            // return tempData;
         }
         
         public ref Node<T> LowestValue
         {
-            get => ref left;
+            get => ref GetLowestValue();
         }
 
         public ref Node<T> LargestValue
         {
-            get => ref right;
+            get => ref GetHighestValue();
         }
         
         

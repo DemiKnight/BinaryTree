@@ -16,17 +16,6 @@ namespace BinaryTreeFinal
             
         }
         
-        /**
-         * @param lhs This should have null data.
-         */
-        public virtual Node<T> MergeTrees(ref Node<T> lhs, ref Node<T> rhs )
-        {
-        
-            
-
-            return null;
-        }
-        
 
         public override RETURN_Code InsertItem(T item)
         {
@@ -80,9 +69,16 @@ namespace BinaryTreeFinal
             else
             {
                 //Case 3 :  Two children
-
-                nodeToRemove = MergeTrees(ref nodeToRemove.Left, ref nodeToRemove.Right);
-
+                if (nodeToRemove.Right != null)
+                {
+                    nodeToRemove.Data = nodeToRemove.Right.LowestValue.Data;
+                    nodeToRemove.Right.LowestValue = null;  
+                }
+                else
+                {
+                    nodeToRemove.Data = nodeToRemove.Left.LargestValue.Data;
+                    nodeToRemove.Left.LargestValue = null;
+                }
                 return RETURN_Code.Sucessful;
             }
         }
