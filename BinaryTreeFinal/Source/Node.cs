@@ -38,14 +38,6 @@ namespace BinaryTreeFinal
             return Equals((Node<T>) obj);
         }
 
-        // public void test(TraversingMethod method, Delegate callBack)
-        // {
-        //     // switch (method)
-        //     // {
-        //     //     case TraversingMethod.InOrder => callBack();
-        //     // }   
-        // }
-
         public override int GetHashCode()
         {
             return EqualityComparer<T>.Default.GetHashCode(data);
@@ -98,16 +90,25 @@ namespace BinaryTreeFinal
             // return ref left;
         }
 
-        private ref Node<T> _highestValue(ref Node<T> selNode, ref Node<T> largest)
+        private ref Node<T> _highestValue(ref Node<T> largest)
         {
+            if (data.CompareTo(largest.data) == 1) largest = this;
+                
+            
+            
+            object testLeft = left?._highestValue( ref largest);
+            dynamic testRight = right?._highestValue( ref largest);
 
-            throw new NotImplementedException();
+            return ref testLeft;
         }
 
         protected ref Node<T> GetHighestValue()
         {
-            throw new NotImplementedException();
-            
+            ref Node<T> refLargest = this;
+
+            _highestValue(ref refLargest);
+
+            return ref refLargest;
         }
         
         protected ref Node<T> GetLowestValue()
