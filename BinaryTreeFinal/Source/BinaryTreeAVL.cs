@@ -12,19 +12,19 @@ namespace BinaryTreeFinal
         {
         }
 
-        public override RETURN_Code RemoveItem(T item)
+        public override ReturnCode RemoveItem(T item)
         {
             throw new NotImplementedException();
             base.RemoveItem(item);
         }
 
-        public override RETURN_Code InsertItem(T item)
+        public override ReturnCode InsertItem(T item)
         {
             throw new NotImplementedException();
             base.InsertItem(item);
         }
 
-        protected override RETURN_Code _insertItem(T item, ref Node<T> tree)
+        protected override ReturnCode _insertItem(T item, ref Node<T> tree)
         {
             throw new NotImplementedException();
             base._insertItem(item, ref tree);

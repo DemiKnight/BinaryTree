@@ -9,19 +9,18 @@ namespace BinaryTreeFinal
     {
         static void Swap<T>( ref T originalPlace, ref T targetPlace)
         {
-            // T tempVal = originalPlace;
-            // targetPlace = originalPlace;
-            // targetPlace = tempVal;
-
             (originalPlace, targetPlace) = (targetPlace, originalPlace);
         }
     }
 
     public class BinaryTree <T> where T:IComparable<T>, IComparable
     {
-        public enum RETURN_Code
+        /**
+         * @brief Standard return for each function.
+         */
+        public enum ReturnCode
         {
-            Sucessful,
+            Successful,
             NotFound,
             UnableToInsert,
             OtherError,
@@ -29,6 +28,9 @@ namespace BinaryTreeFinal
             ValueAlreadyPresent
         }
         
+        /**
+         * 
+         */
         protected Node<T> root;
         protected int _numberOfNodes = 0;
         protected int _heightOfNodes = 0;
@@ -113,13 +115,13 @@ namespace BinaryTreeFinal
             }
         }
         
-        public virtual RETURN_Code InsertItem(T item)
+        public virtual ReturnCode InsertItem(T item)
         {
             throw new NotImplementedException();
             _insertItem(item, ref root);
         }
 
-        protected virtual RETURN_Code _insertItem(T item, ref Node<T> tree)
+        protected virtual ReturnCode _insertItem(T item, ref Node<T> tree)
         {
             throw new NotImplementedException();
             
@@ -127,19 +129,19 @@ namespace BinaryTreeFinal
         }
 
 
-        protected virtual RETURN_Code _returnItem(ref Node<T> selectedNode, T removalItem)
+        protected virtual ReturnCode _returnItem(ref Node<T> selectedNode, T removalItem)
         {
 
-            return RETURN_Code.NotFound;
+            return ReturnCode.NotFound;
         }
 
-        protected virtual RETURN_Code _removeItem(T item, ref Node<T> tree)
+        protected virtual ReturnCode _removeItem(T item, ref Node<T> tree)
         {
             
-            return RETURN_Code.NotFound;
+            return ReturnCode.NotFound;
         }
         
-        public virtual RETURN_Code RemoveItem(T item)
+        public virtual ReturnCode RemoveItem(T item)
         {
             return _removeItem(item, ref root);
         }
@@ -204,8 +206,11 @@ namespace BinaryTreeFinal
             return GetValues().ToString();
         }
 
-        
-        
+
+        public Node<T> GetRoot()
+        {
+            return root.Clone();
+        }
     }
     
 }

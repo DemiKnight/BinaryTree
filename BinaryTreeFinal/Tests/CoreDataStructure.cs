@@ -18,10 +18,7 @@ namespace BinaryTreeFinal.Tests
             currentTestNode.Right = new Node<int>(3);
             currentTestNode.Left.Left = new Node<int>(4);
             test = new BinaryTree<int>(currentTestNode);
-
         }
-
-
 
         [Test]
         public void BTInsertValues()
@@ -33,7 +30,6 @@ namespace BinaryTreeFinal.Tests
             test.InsertItem(5);
             test.InsertItem(6);
             Assert.Contains(test.GetValues(), new int[] {1, 2, 3, 4, 5, 6 });
-            
         }
 
         [Test]

@@ -17,12 +17,12 @@ namespace BinaryTreeFinal
         }
         
 
-        public override RETURN_Code InsertItem(T item)
+        public override ReturnCode InsertItem(T item)
         {
             return _insertItem(item, ref root);
         }
 
-        protected override RETURN_Code _insertItem(T item, ref Node<T> tree)
+        protected override ReturnCode _insertItem(T item, ref Node<T> tree)
         {
             if (tree == null) tree = new Node<T>(item);
 
@@ -35,20 +35,20 @@ namespace BinaryTreeFinal
                     _insertItem(item, ref tree.Right);
                     break;
                 case 0:
-                    return RETURN_Code.ValueAlreadyPresent;
+                    return ReturnCode.ValueAlreadyPresent;
             }
             // base._insertItem(item, ref tree);
 
-            return RETURN_Code.OtherError;
+            return ReturnCode.OtherError;
         }
 
-        protected virtual RETURN_Code _attemptRemoval(ref Node<T> nodeToRemove)
+        protected virtual ReturnCode _attemptRemoval(ref Node<T> nodeToRemove)
         {
             if (nodeToRemove.Childless)
             {
-                //Case 1
+                //Case 1 - No children
                 nodeToRemove = null;
-                return RETURN_Code.Sucessful;
+                return ReturnCode.Successful;
             }
             if (nodeToRemove.NumberOfChildren == 1)
             {
@@ -56,34 +56,42 @@ namespace BinaryTreeFinal
                 if (nodeToRemove.Left == null)
                 {
                     nodeToRemove = nodeToRemove.Right;
-                    return RETURN_Code.Sucessful;
+                    return ReturnCode.Successful;
                 }
                 else
                 {
                     nodeToRemove = nodeToRemove.Left;
-                    return RETURN_Code.Sucessful;
+                    return ReturnCode.Successful;
                 }
 
                 
             }
+            //Case 3 :  Two children
+            if (nodeToRemove.Right != null)
+            {
+                Node<T> tempNode = nodeToRemove.Right;
+                nodeToRemove.Right.GetLowestValue(ref tempNode);
+
+                nodeToRemove.Data = tempNode.Data;
+                tempNode = null;
+
+
+                // nodeToRemove.Data = nodeToRemove.Right.GetLowestValue().Data;
+                // nodeToRemove.Right.LowestValue = null;  
+            }
             else
             {
-                //Case 3 :  Two children
-                if (nodeToRemove.Right != null)
-                {
-                    nodeToRemove.Data = nodeToRemove.Right.LowestValue.Data;
-                    nodeToRemove.Right.LowestValue = null;  
-                }
-                else
-                {
-                    nodeToRemove.Data = nodeToRemove.Left.LargestValue.Data;
-                    nodeToRemove.Left.LargestValue = null;
-                }
-                return RETURN_Code.Sucessful;
+                Node<T> tempNode = nodeToRemove.Left;
+                nodeToRemove.Left.GetLowestValue(ref tempNode);
+
+                nodeToRemove.Data = tempNode.Data;
+                tempNode = null;
+
             }
+            return ReturnCode.Successful;
         }
         
-        protected override RETURN_Code _removeItem(T item, ref Node<T> tree)
+        protected override ReturnCode _removeItem(T item, ref Node<T> tree)
         {
             if (tree.Data.CompareTo(item) == 0)
             {
@@ -95,10 +103,10 @@ namespace BinaryTreeFinal
                 else if (tree.Right != null) return _removeItem(item, ref tree.Right);
             }
 
-            return RETURN_Code.OtherError;
+            return ReturnCode.OtherError;
         }
 
-        public override RETURN_Code RemoveItem(T item)
+        public override ReturnCode RemoveItem(T item)
         {
             return _removeItem(item, ref root);
         }

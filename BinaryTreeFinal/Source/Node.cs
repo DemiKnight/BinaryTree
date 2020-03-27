@@ -15,6 +15,13 @@ namespace BinaryTreeFinal
             this.data = comparable;
         }
 
+        public Node(T newData, Node<T> newLeft, Node<T> newRight)
+        {
+            this.data = newData;
+            this.left = newLeft;
+            this.right = newRight;
+        }
+
         public ref Node<T> Right => ref right;
 
         public ref Node<T> Left => ref left;
@@ -72,67 +79,39 @@ namespace BinaryTreeFinal
             get => _numberOfChildren();
         }
 
-        private ref Node<T> _lowestValue( out  Node<T> selNode, Node<T> smallest)
+        private void _lowestValue(ref Node<T> smallestNode)
         {
-            throw new NotImplementedException();
-            //
-            // T tempStore = (largest == null ? selNode.data : largest.data);
-            //
-            // if (tempStore.CompareTo(selNode.data) == -1)
-            //     largest = selNode;
-            //
-            // if (selNode.right != null) _lowestValue(ref selNode.Right, ref largest);
-            // if (selNode.left == null && selNode.right == null)
-            // {
-            //     return ref largest;
-            // }
-            //
-            // return ref left;
+            if (data.CompareTo(smallestNode.data) == -1) smallestNode = this;
+
+            left?._lowestValue(ref smallestNode);
+            right?._lowestValue(ref smallestNode);
+        }
+        public void GetLowestValue(ref Node<T> startNode)
+        {
+            startNode._lowestValue(ref startNode);
         }
 
-        private ref Node<T> _highestValue(ref Node<T> largest)
+        private void _highestValue(ref Node<T> largestNode)
         {
-            if (data.CompareTo(largest.data) == 1) largest = this;
-                
+            //TODO Improve this redundant code
+            if (data.CompareTo(largestNode.data) == 1) largestNode = this;
+
+
+            left?._highestValue(ref largestNode);
+            right?._highestValue(ref largestNode);
+        }
+
+        public void GetHighestValue(ref Node<T> startNode)
+        {
+            startNode._highestValue(ref startNode);
             
-            
-            object testLeft = left?._highestValue( ref largest);
-            dynamic testRight = right?._highestValue( ref largest);
-
-            return ref testLeft;
-        }
-
-        protected ref Node<T> GetHighestValue()
-        {
-            ref Node<T> refLargest = this;
-
-            _highestValue(ref refLargest);
-
-            return ref refLargest;
-        }
-        
-        protected ref Node<T> GetLowestValue()
-        {
-            throw new NotImplementedException();
-            // ref Node<T> tempData;
-            //
-            // if (this.left != null) tempData = _lowestValue(out left);
-            // if (this.right != null) _lowestValue(ref Right);
-            //
-            // //TODO Sort out this shit
-            // return tempData;
-        }
-        
-        public ref Node<T> LowestValue
-        {
-            get => ref GetLowestValue();
-        }
-
-        public ref Node<T> LargestValue
-        {
-            get => ref GetHighestValue();
         }
         
         
+
+        internal Node<T> Clone()
+        {
+            return new Node<T>(data, left, right);
+        }
     }
 }
