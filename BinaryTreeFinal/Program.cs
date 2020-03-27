@@ -33,12 +33,10 @@ namespace BinaryTreeFinal
             testBS.InsertItem(4);
 
             testBS.RemoveItem(14);
-            
-            Console.WriteLine("Hello");
 
             Node<int> testNode = root;
-            root.GetLowestValue(ref testNode);
-            Console.WriteLine(testNode.Data);
+            Node<int>.GetLowestValue(ref testNode);
+            Console.WriteLine(testNode.ToString());
         }
 
 

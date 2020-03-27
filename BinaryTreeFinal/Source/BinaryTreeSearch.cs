@@ -63,26 +63,21 @@ namespace BinaryTreeFinal
                     nodeToRemove = nodeToRemove.Left;
                     return ReturnCode.Successful;
                 }
-
-                
             }
+
             //Case 3 :  Two children
             if (nodeToRemove.Right != null)
             {
-                Node<T> tempNode = nodeToRemove.Right;
-                nodeToRemove.Right.GetLowestValue(ref tempNode);
+                ref Node<T> tempNode = ref nodeToRemove.Right;
+                Node<T>.GetLowestValue(ref tempNode);
 
                 nodeToRemove.Data = tempNode.Data;
                 tempNode = null;
-
-
-                // nodeToRemove.Data = nodeToRemove.Right.GetLowestValue().Data;
-                // nodeToRemove.Right.LowestValue = null;  
             }
             else
             {
                 Node<T> tempNode = nodeToRemove.Left;
-                nodeToRemove.Left.GetLowestValue(ref tempNode);
+                Node<T>.GetHighestValue(ref tempNode);
 
                 nodeToRemove.Data = tempNode.Data;
                 tempNode = null;

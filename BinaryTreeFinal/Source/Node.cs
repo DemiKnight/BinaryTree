@@ -86,7 +86,7 @@ namespace BinaryTreeFinal
             left?._lowestValue(ref smallestNode);
             right?._lowestValue(ref smallestNode);
         }
-        public void GetLowestValue(ref Node<T> startNode)
+        public static void GetLowestValue(ref Node<T> startNode)
         {
             startNode._lowestValue(ref startNode);
         }
@@ -101,7 +101,7 @@ namespace BinaryTreeFinal
             right?._highestValue(ref largestNode);
         }
 
-        public void GetHighestValue(ref Node<T> startNode)
+        public static void GetHighestValue(ref Node<T> startNode)
         {
             startNode._highestValue(ref startNode);
             
