@@ -8,8 +8,7 @@ namespace BinaryTreeFinal
     {
         private T data;
         private Node<T> right, left;
-        
-        
+
         public Node(T comparable)
         {
             this.data = comparable;
@@ -32,6 +31,8 @@ namespace BinaryTreeFinal
             set => data = value;
         }
 
+        public int BalanceFactor { get; set; } = 0;
+
         protected bool Equals(Node<T> other)
         {
             return EqualityComparer<T>.Default.Equals(data, other.data);
@@ -50,14 +51,12 @@ namespace BinaryTreeFinal
             return EqualityComparer<T>.Default.GetHashCode(data);
         }
 
-        protected string _toString()
-        {
-            return (left != null ? left._toString() : "") + " " + data.ToString() + " " + (right != null ? Right._toString() : "");
-        }
-
         public override string ToString()
         {
-            return _toString();
+            // return (left?.ToString() ?? "") + " " + data.ToString() + " " + (right?.ToString() ?? "");
+
+            // return (left != null ? left.ToString() : "") + " " + data.ToString() + " " + (right != null ? Right.ToString() : "");
+            return "";
         }
 
         public bool Childless
@@ -106,12 +105,33 @@ namespace BinaryTreeFinal
             startNode._highestValue(ref startNode);
             
         }
-        
-        
 
         internal Node<T> Clone()
         {
             return new Node<T>(data, left, right);
         }
+
+        private void _height(ref int returnVal)
+        {
+            returnVal++;
+
+            int rightHeight = 0;
+            int leftHeight = 0;
+
+            left?._height(ref leftHeight);
+            right?._height(ref rightHeight);
+
+            returnVal += (leftHeight > rightHeight ? leftHeight : rightHeight);
+        }
+
+        public int Height()
+        {
+            int returnVal = 0;
+
+            _height(ref returnVal);
+
+            return returnVal;
+        }
+
     }
 }

@@ -80,11 +80,11 @@ namespace BinaryTreeFinal.Tests
         [Test]
         public void BSHeightCheck()
         {
-            Assert.AreEqual(test.Height, 3, "Height Test");
+            Assert.AreEqual(test.Height(), 3, "Height Test");
             test.InsertItem(5);
-            Assert.AreEqual(test.Height, 3, "Height Test, after insertion");
+            Assert.AreEqual(test.Height(), 3, "Height Test, after insertion");
             test.InsertItem(6);
-            Assert.AreEqual(test.Height, 4, "Height Test, after insertion x2");
+            Assert.AreEqual(test.Height(), 4, "Height Test, after insertion x2");
         }
 
         [Test]

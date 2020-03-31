@@ -54,7 +54,7 @@ namespace BinaryTreeFinal
             if (nextNode.Right != null) _count(ref returnVal, ref nextNode.Right);
         }
 
-        private void _height(ref int returnVal, ref Node<T> nextNode)
+        /*private void _height(ref int returnVal, ref Node<T> nextNode)
         {
             returnVal++;
             
@@ -65,28 +65,23 @@ namespace BinaryTreeFinal
             if (nextNode.Right != null) _height(ref rightHeight, ref nextNode.Right);
 
             returnVal += (leftHeight > rightHeight ? leftHeight : rightHeight);
-        }
+        }*/
 
         public int Count
         {
             get => _numberOfNodes;
         }
 
-        protected int _Height()
-        {
+        public int Height()
+        {/*
             int returnVal = 0;
             
-            _height(ref returnVal, ref root);
+            _height(ref returnVal, ref root);*/
             
-            return returnVal;
-        }
-        
-        public int Height
-        {
-            get => _Height();
+            return root.Height();
         }
 
-        
+
 
         public bool Contains(T item)
         {
@@ -186,7 +181,7 @@ namespace BinaryTreeFinal
         {
             List<T> returnList = new List<T>();
 
-            _getValues(ref returnList, root);
+            if(root != null) _getValues(ref returnList, root);
 
             return returnList.ToArray();
         }
@@ -194,8 +189,8 @@ namespace BinaryTreeFinal
         private void _getValues(ref List<T> returnList, Node<T> rootNode) 
         {
             returnList.Add(rootNode.Data);
-            _getValues(ref returnList, rootNode.Left);
-            _getValues(ref returnList, rootNode.Right);
+            if(rootNode.Left != null) _getValues(ref returnList, rootNode.Left);
+            if (rootNode.Right != null)  _getValues(ref returnList, rootNode.Right);
         }
 
         /**
@@ -203,7 +198,8 @@ namespace BinaryTreeFinal
          */
         public override string ToString()
         {
-            return GetValues().ToString();
+            // return GetValues().ToString();
+            return root.ToString();
         }
 
 
