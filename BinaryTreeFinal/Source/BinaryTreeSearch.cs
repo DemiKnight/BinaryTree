@@ -6,15 +6,9 @@ namespace BinaryTreeFinal
     {
         
         
-        public BinaryTreeSearch(Node<T> root) : base(root)
-        {
-            
-        }
+        public BinaryTreeSearch(Node<T> root) : base(root) {}
 
-        public BinaryTreeSearch(T data) : base(data)
-        {
-            
-        }
+        public BinaryTreeSearch(T data) : base(data) {}
         
 
         public override ReturnCode InsertItem(T item)
@@ -37,7 +31,6 @@ namespace BinaryTreeFinal
                 case 0:
                     return ReturnCode.ValueAlreadyPresent;
             }
-            // base._insertItem(item, ref tree);
 
             return ReturnCode.OtherError;
         }
@@ -52,7 +45,7 @@ namespace BinaryTreeFinal
             }
             if (nodeToRemove.NumberOfChildren == 1)
             {
-                // Case 2 
+                // Case 2 - 1 Child
                 if (nodeToRemove.Left == null)
                 {
                     nodeToRemove = nodeToRemove.Right;
@@ -66,37 +59,23 @@ namespace BinaryTreeFinal
             }
 
             //Case 3 :  Two children
-            if (nodeToRemove.Right != null)
-            {
-                ref Node<T> tempNode = ref nodeToRemove.Right;
-                Node<T>.GetLowestValue(ref tempNode);
 
-                nodeToRemove.Data = tempNode.Data;
-                tempNode = null;
-            }
-            else
-            {
-                Node<T> tempNode = nodeToRemove.Left;
-                Node<T>.GetHighestValue(ref tempNode);
+            ref Node<T> tempNode = ref nodeToRemove.Right;
+            Node<T>.GetLowestValue(ref tempNode);
 
-                nodeToRemove.Data = tempNode.Data;
-                tempNode = null;
+            nodeToRemove.Data = tempNode.Data;
+            tempNode = null;
 
-            }
             return ReturnCode.Successful;
         }
         
         protected override ReturnCode _removeItem(T item, ref Node<T> tree)
-        {
-            if (tree.Data.CompareTo(item) == 0)
-            {
-                return _attemptRemoval(ref tree);
-            }
-            else
-            {
-                if (tree.Left != null) return _removeItem(item, ref tree.Left);
-                else if (tree.Right != null) return _removeItem(item, ref tree.Right);
-            }
+        { 
+            if (tree.Data.CompareTo(item) == 0) return _attemptRemoval(ref tree);
+
+            if (tree.Left != null) return _removeItem(item, ref tree.Left);
+            if (tree.Right != null) return _removeItem(item, ref tree.Right);
+
 
             return ReturnCode.OtherError;
         }

@@ -53,10 +53,7 @@ namespace BinaryTreeFinal
 
         public override string ToString()
         {
-            // return (left?.ToString() ?? "") + " " + data.ToString() + " " + (right?.ToString() ?? "");
-
-            // return (left != null ? left.ToString() : "") + " " + data.ToString() + " " + (right != null ? Right.ToString() : "");
-            return "";
+            return (left?.ToString() ?? "") + " " + data.ToString() + " " + (right?.ToString() ?? "");
         }
 
         public bool Childless

@@ -20,26 +20,11 @@ namespace BinaryTreeFinal
             if (tree.Right?.BalanceFactor > 0)  //double rotate
                 rotateRight(ref tree.Right);
 
-
-            Node<T> newRoot = tree;
-            // ref Node<T> oldRoot = ref tree; 
-            // ref Node<T> newRightForOld = ref newRoot.Left;
-
+            Node<T> pivot = tree;
 
             tree = tree.Right;
-            newRoot.Right = tree.Left;
-
-            tree.Left = newRoot;
-
-            // tree = newRoot;
-            // tree.Right = oldRoot;
-            // oldRoot.Right = newRightForOld;
-            
-
-            // tree.Right = newRoot.Left;
-
-
-
+            pivot.Right = tree.Left;
+            tree.Left = pivot;
 
         }
 
@@ -48,36 +33,18 @@ namespace BinaryTreeFinal
             if (tree.Left?.BalanceFactor < 0)  //double rotate
                 rotateLeft(ref tree.Left);
 
-
-            // (tree.Left, tree, tree.Right) = (tree.Left.Right,tree, tree.Right);
-
-            /*
-            Node<T> oldRoot = tree;
-            Node<T> newRoot = tree.Left;*/
             Node<T> pivot = tree;
 
-            // ref Node<T> oldRoot = ref tree;
-            // ref Node<T> newRoot = ref tree.Left;
-            // ref Node<T> newRightForOld = ref newRoot.Right;
-            //
-            //
-
-            // tree.Right = 
             tree = tree.Left;
-
             pivot.Left = tree.Right;
             tree.Right = pivot;
 
-
-            //
-            // tree.Right = oldRoot;
-            // tree.Left= newRightForOld;
         }
 
         public override ReturnCode RemoveItem(T item)
         {
-            throw new NotImplementedException();
             base.RemoveItem(item);
+            return ReturnCode.Successful;
         }
 
         public override ReturnCode InsertItem(T item)
@@ -94,7 +61,6 @@ namespace BinaryTreeFinal
             if (tree == null) tree = new Node<T>(item);
             else
             {
-
 
                 switch (item.CompareTo(tree.Data))
                 {
@@ -131,7 +97,6 @@ namespace BinaryTreeFinal
 
         protected override void _copy(ref Node<T> tree, Node<T> tree2)
         {
-            throw new NotImplementedException();
             base._copy(ref tree, tree2);
         }
     }
