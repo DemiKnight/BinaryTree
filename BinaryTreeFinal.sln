@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTreeFinal", "BinaryTreeFinal\BinaryTreeFinal.csproj", "{08D8DD42-E666-4B22-83B4-F8B3939A534C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniqueWordCoursework", "UniqueWordCoursework\UniqueWordCoursework.csproj", "{471933A9-557C-462A-A871-01A9466B176E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend-WordStore", "Frontend-WordStore\Frontend-WordStore.csproj", "{3BE814EA-28FD-4E6D-85BA-21DD9917A66D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +17,15 @@ Global
 		{08D8DD42-E666-4B22-83B4-F8B3939A534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D8DD42-E666-4B22-83B4-F8B3939A534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08D8DD42-E666-4B22-83B4-F8B3939A534C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{471933A9-557C-462A-A871-01A9466B176E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{471933A9-557C-462A-A871-01A9466B176E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{471933A9-557C-462A-A871-01A9466B176E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{471933A9-557C-462A-A871-01A9466B176E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE814EA-28FD-4E6D-85BA-21DD9917A66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE814EA-28FD-4E6D-85BA-21DD9917A66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE814EA-28FD-4E6D-85BA-21DD9917A66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE814EA-28FD-4E6D-85BA-21DD9917A66D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A8A21EB-60C6-47E9-B6A0-C4728A5B1C0B}
 	EndGlobalSection
 EndGlobal

@@ -42,9 +42,17 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainScrene.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainScrene.Designer.cs">
+      <DependentUpon>MainScrene.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Location.cs" />
