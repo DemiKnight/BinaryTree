@@ -2,11 +2,11 @@ using System;
 
 namespace BinaryTreeFinal
 {
-    public class BinaryTreeSearch <T> : BinaryTree<T> where T:IComparable<T>, IComparable
+    public class BinaryTreeSearch <T, X> : BinaryTree<T, X> where T:IComparable<T> where X:Node<T, X>, new()
     {
         
         
-        public BinaryTreeSearch(Node<T> root) : base(root) {}
+        public BinaryTreeSearch(X root) : base(root) {}
 
         public BinaryTreeSearch(T data) : base(data) {}
         
@@ -16,9 +16,9 @@ namespace BinaryTreeFinal
             return _insertItem(item, ref root);
         }
 
-        protected override ReturnCode _insertItem(T item, ref Node<T> tree)
+        protected override ReturnCode _insertItem(T item, ref X tree)
         {
-            if (tree == null) tree = new Node<T>(item);
+            if (tree == null) tree = new X() { Data = item };
 
             switch (item.CompareTo(tree.Data))
             {
@@ -35,7 +35,7 @@ namespace BinaryTreeFinal
             return ReturnCode.OtherError;
         }
 
-        protected virtual ReturnCode _attemptRemoval(ref Node<T> nodeToRemove)
+        protected virtual ReturnCode _attemptRemoval(ref X nodeToRemove)
         {
             if (nodeToRemove.Childless)
             {
@@ -60,8 +60,8 @@ namespace BinaryTreeFinal
 
             //Case 3 :  Two children
 
-            ref Node<T> tempNode = ref nodeToRemove.Right;
-            Node<T>.GetLowestValue(ref tempNode);
+            ref X tempNode = ref nodeToRemove.Right;
+            Node<T, X>.GetLowestValue(ref tempNode);
 
             nodeToRemove.Data = tempNode.Data;
             tempNode = null;
@@ -69,7 +69,7 @@ namespace BinaryTreeFinal
             return ReturnCode.Successful;
         }
         
-        protected override ReturnCode _removeItem(T item, ref Node<T> tree)
+        protected override ReturnCode _removeItem(T item, ref X tree)
         { 
             if (tree.Data.CompareTo(item) == 0) return _attemptRemoval(ref tree);
 

@@ -17,15 +17,15 @@ namespace BinaryTreeFinal
         }
     }
 
-    public class BinaryTree <T> where T:IComparable<T>, IComparable
+    public class BinaryTree <T, X> where T:IComparable<T> where X : Node<T, X>, new()
     {
 
         public BinaryTree(T data)
         {
-            this.root = new Node<T>(data);
+            this.root = new X {Data = data};
         }
 
-        public BinaryTree(Node<T> root)
+        public BinaryTree(X root)
         {
             this.root = root;
 
@@ -49,7 +49,7 @@ namespace BinaryTreeFinal
         /**
          * 
          */
-        protected Node<T> root;
+        protected X root;
 
         /**
          * @brief Used as a cache, will be set to -1 if a node change has occured.
@@ -92,7 +92,7 @@ namespace BinaryTreeFinal
             }
         }
 
-        protected bool _contains(T search, Node<T> rootElement)
+        protected bool _contains(T search, X rootElement)
         {
             return rootElement.Data.Equals(search) || (_contains(search, root.Left) || _contains(search, root.Right));
         }
@@ -102,16 +102,16 @@ namespace BinaryTreeFinal
             return _contains(item, root);
         }
 
-        protected virtual void _copy(ref Node<T> target, Node<T> source)
+        protected virtual void _copy(ref X target, X source)
         {
             if (source == null) return; //TODO Evaluate my life choices and see if this will let me sleep.
-            target = new Node<T>(source.Data);
+            target = new X() {Data = source.Data };
 
             _copy(ref target.Left, source.Left);
             _copy(ref target.Right, source.Right);
         }
 
-        public virtual void Copy(BinaryTree<T> tree)
+        public virtual void Copy(BinaryTree<T, X> tree)
         {
             _copy(ref root, tree.root);
         }
@@ -119,10 +119,10 @@ namespace BinaryTreeFinal
         /**
          * @brief Randomly assigns values within the binary tree.
          */
-        protected virtual ReturnCode _insertItem(T item, ref Node<T> tree)
+        protected virtual ReturnCode _insertItem(T item, ref X tree)
         {
 
-            ref Node<T> selectNode = ref tree.Right;
+            ref X selectNode = ref tree.Right;
 
             if (new Random(23).Next(11) % 2 == 0)
             {
@@ -131,7 +131,7 @@ namespace BinaryTreeFinal
 
             if (selectNode == null)
             {
-                selectNode = new Node<T>(item);
+                selectNode = new X() { Data = item };
                 return ReturnCode.Successful;
             }
 
@@ -145,13 +145,13 @@ namespace BinaryTreeFinal
             return ReturnCode.Successful;
         }
 
-        protected virtual ReturnCode _returnItem(ref Node<T> selectedNode, T removalItem)
+        protected virtual ReturnCode _returnItem(ref X selectedNode, T removalItem)
         {
 
             return ReturnCode.NotFound;
         }
 
-        protected virtual ReturnCode _removeItem(T item, ref Node<T> tree)
+        protected virtual ReturnCode _removeItem(T item, ref X tree)
         {
             
             return ReturnCode.NotFound;
@@ -162,7 +162,7 @@ namespace BinaryTreeFinal
             return _removeItem(item, ref root);
         }
 
-        protected virtual bool _equals(ref Node<T> rhs, ref Node<T> lhs)
+        protected virtual bool _equals(ref X rhs, ref X lhs)
         {
             if (rhs.Data.Equals(lhs.Data))
             {
@@ -176,24 +176,24 @@ namespace BinaryTreeFinal
 
         public override bool Equals(object obj)
         {
-            if (!(obj is BinaryTree<T>) || (obj as BinaryTree<T>).Count != this.Count) return false;
+            if (!(obj is BinaryTree<T, X>) || ((BinaryTree<T, X>) obj).Count != this.Count) return false;
 
-            BinaryTree<T> temp = obj as BinaryTree<T>;
+            BinaryTree<T, X> temp = obj as BinaryTree<T, X>;
 
-            return (_equals(ref root, ref (obj as BinaryTree<T>).root));
+            return (_equals(ref root, ref ((BinaryTree<T, X>) obj).root));
         }
         
-        public bool Equals(BinaryTree<T> tree)
+        public bool Equals(BinaryTree<T, X> tree)
         {
             return Equals(tree);
         }
 
-        public virtual void CopyTo(ref BinaryTree<T> tree)
+        public virtual void CopyTo(ref BinaryTree<T, X> tree)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool SubTree(BinaryTree<T> tree)
+        public virtual bool SubTree(BinaryTree<T, X> tree)
         {
             throw new NotImplementedException();
         }
@@ -207,7 +207,7 @@ namespace BinaryTreeFinal
             return returnList.ToArray();
         }
 
-        private void _getValues(ref List<T> returnList, Node<T> rootNode) 
+        private void _getValues(ref List<T> returnList, X rootNode) 
         {
             returnList.Add(rootNode.Data);
             if(rootNode.Left != null) _getValues(ref returnList, rootNode.Left);
@@ -224,7 +224,7 @@ namespace BinaryTreeFinal
         }
 
 
-        public Node<T> GetRoot()
+        public X GetRoot()
         {
             //TODO Change to deep clone
             return root.Clone();

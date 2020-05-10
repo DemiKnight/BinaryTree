@@ -4,31 +4,36 @@ using NUnit.Framework.Interfaces;
 
 namespace BinaryTreeFinal
 {
-    public class Node <T> where T:IComparable
+    public class Node <T, X> where T:IComparable<T> where X:Node<T, X>, new()
     {
         public Node(T comparable)
         {
             this.Data = comparable;
         }
 
-        public Node(T newData, Node<T> newLeft, Node<T> newRight)
+        public Node()
+        {
+
+        }
+
+        public Node(T newData, X newLeft, X newRight)
         {
             this.Data = newData;
             this._left = newLeft;
             this._right = newRight;
         }
 
-        private Node<T> _right, _left;
+        private X _right, _left;
 
         /**
          * @brief Reference to the Right node, could be null.
          */
-        public ref Node<T> Right => ref _right;
+        public ref X Right => ref _right;
 
         /**
          * @brief Reference to the Left node, could be null.
          */
-        public ref Node<T> Left => ref _left;
+        public ref X Left => ref _left;
 
         /**
          * @brief Stores the value for this particular node.
@@ -40,7 +45,7 @@ namespace BinaryTreeFinal
          */
         public int BalanceFactor { get; set; } = 0;
 
-        protected bool Equals(Node<T> other)
+        protected bool Equals(X other)
         {
             return EqualityComparer<T>.Default.Equals(Data, other.Data);
         }
@@ -49,7 +54,7 @@ namespace BinaryTreeFinal
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == this.GetType() && Equals((Node<T>) obj);
+            return obj.GetType() == this.GetType() && Equals((X) obj);
         }
 
         /**
@@ -95,9 +100,9 @@ namespace BinaryTreeFinal
          * @brief Set the input reference to the lowest value node.
          * @depreciated 
          */
-        private void _lowestValue(ref Node<T> smallestNode)
+        private void _lowestValue(ref X smallestNode)
         {
-            if (Data.CompareTo(smallestNode.Data) == -1) smallestNode = this;
+            if (Data.CompareTo(smallestNode.Data) == -1) smallestNode = (X) this;
 
             _left?._lowestValue(ref smallestNode);
             _right?._lowestValue(ref smallestNode);
@@ -107,29 +112,29 @@ namespace BinaryTreeFinal
          * @brief Set the input reference to the greatest value node.
          * @depreciated 
          */
-        private void _highestValue(ref Node<T> largestNode)
+        private void _highestValue(ref X largestNode)
         {
-            if (Data.CompareTo(largestNode.Data) == 1) largestNode = this;
+            if (Data.CompareTo(largestNode.Data) == 1) largestNode = (X) this;
 
             _left?._highestValue(ref largestNode);
             _right?._highestValue(ref largestNode);
         }
 
 
-        private void _equalsValue(ref Node<T> smallestNode, short checkAgainst)
+        private void _equalsValue(ref X smallestNode, short checkAgainst)
         {
-            if (Data.CompareTo(smallestNode.Data) == checkAgainst) smallestNode = this;
+            if (Data.CompareTo(smallestNode.Data) == checkAgainst) smallestNode = (X) this;
 
             _left?._equalsValue(ref smallestNode, checkAgainst);
             _right?._equalsValue(ref smallestNode, checkAgainst);
         }
 
-        public static void GetHighestValue(ref Node<T> startNode)
+        public static void GetHighestValue(ref X startNode)
         {
             startNode._equalsValue(ref startNode, 1);
             
         }
-        public static void GetLowestValue(ref Node<T> startNode)
+        public static void GetLowestValue(ref X startNode)
         {
             startNode._equalsValue(ref startNode, -1);
         }
@@ -138,9 +143,9 @@ namespace BinaryTreeFinal
          * @brief Shallow clone of the tree
          *
          */
-        internal Node<T> Clone()
+        internal X Clone()
         {
-            return new Node<T>(Data, _left, _right);
+            return new X() {Data = Data, Left = _left, Right = _right};
         }
 
 
@@ -173,7 +178,7 @@ namespace BinaryTreeFinal
             return returnVal;
         }
 
-        private void _count(ref Node<T> selectedNode, ref int returnCounter)
+        private void _count(ref X selectedNode, ref int returnCounter)
         {
             returnCounter++;
 
@@ -184,7 +189,7 @@ namespace BinaryTreeFinal
         /**
          * @brief Will count the number of 
          */
-        public int Count(ref Node<T> startNode)
+        public int Count(ref X startNode)
         {
             int returnCount = 0;
 

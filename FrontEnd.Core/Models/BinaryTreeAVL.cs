@@ -2,23 +2,23 @@ using System;
 
 namespace BinaryTreeFinal
 {
-    public class BinaryTreeAVL<T> : BinaryTreeSearch<T> where T:IComparable, IComparable<T>
+    public class BinaryTreeAVL<T, X> : BinaryTreeSearch<T, X> where T:IComparable<T> where X:Node<T, X>, new()
     {
-        public BinaryTreeAVL(Node<T> root) : base(root)
-        {
-        }
+
 
         public BinaryTreeAVL(T data) : base(data)
         {
         }
 
-
-        private void rotateLeft(ref Node<T> tree)
+        /**
+         * @brief Will rotate the parent and two siblings left, to/and maintain tree balance. 
+         */
+        private void RotateLeft(ref X tree)
         {
             if (tree.Right?.BalanceFactor > 0)  //double rotate
-                rotateRight(ref tree.Right);
+                RotateRight(ref tree.Right);
 
-            Node<T> pivot = tree;
+            X pivot = tree;
 
             tree = tree.Right;
             pivot.Right = tree.Left;
@@ -26,12 +26,15 @@ namespace BinaryTreeFinal
 
         }
 
-        private void rotateRight(ref Node<T> tree)
+        /**
+         * @brief Will rotate the parent and two siblings right, to/and maintain tree balance. 
+         */
+        private void RotateRight(ref X tree)
         {
             if (tree.Left?.BalanceFactor < 0)  //double rotate
-                rotateLeft(ref tree.Left);
+                RotateLeft(ref tree.Left);
 
-            Node<T> pivot = tree;
+            X pivot = tree;
 
             tree = tree.Left;
             pivot.Left = tree.Right;
@@ -39,24 +42,13 @@ namespace BinaryTreeFinal
 
         }
 
-        public override ReturnCode RemoveItem(T item)
-        {
-            base.RemoveItem(item);
-            return ReturnCode.Successful;
-        }
 
-        public override ReturnCode InsertItem(T item)
-        {
-            _insertItem(item, ref root);
-            return ReturnCode.Successful;
-        }
-
-        protected override ReturnCode _insertItem(T item, ref Node<T> tree)
+        protected override ReturnCode _insertItem(T item, ref X tree)
         {
             int leftChange = tree?.Left?.Height() ?? 0;
             int rightChange = tree?.Right?.Height() ?? 0;
 
-            if (tree == null) tree = new Node<T>(item);
+            if (tree == null) tree = new X() {Data = item };
             else
             {
 
@@ -86,16 +78,27 @@ namespace BinaryTreeFinal
             }
 
             if (tree.BalanceFactor <= -2)
-                rotateLeft(ref tree);
+                RotateLeft(ref tree);
             if (tree.BalanceFactor >= 2)
-                rotateRight(ref tree);
+                RotateRight(ref tree);
 
             return ReturnCode.OtherError;
         }
 
-        protected override void _copy(ref Node<T> tree, Node<T> tree2)
+        /**
+         * @brief Insert a new unique item into the tree, whilst maintain tree balance and integrity.
+         */
+        public override ReturnCode InsertItem(T item)
         {
-            base._copy(ref tree, tree2);
+            _insertItem(item, ref root);
+            return ReturnCode.Successful;
         }
+
+
+        //
+        // protected override void _copy(ref Node<T> tree, Node<T> tree2)
+        // {
+        //     base._copy(ref tree, tree2);
+        // }
     }
 }
