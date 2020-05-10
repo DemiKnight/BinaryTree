@@ -13,8 +13,6 @@ namespace BinaryTreeFinal
         }
 
 
-
-
         private void rotateLeft(ref Node<T> tree)
         {
             if (tree.Right?.BalanceFactor > 0)  //double rotate

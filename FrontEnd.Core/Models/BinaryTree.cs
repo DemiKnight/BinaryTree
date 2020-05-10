@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Dynamic;
 using System.Security.Permissions;
 
 namespace BinaryTreeFinal
 {
     struct Utilites
     {
+        /**
+         * @brief Swap two variables around,
+         */
         static void Swap<T>( ref T originalPlace, ref T targetPlace)
         {
             (originalPlace, targetPlace) = (targetPlace, originalPlace);
@@ -15,6 +19,20 @@ namespace BinaryTreeFinal
 
     public class BinaryTree <T> where T:IComparable<T>, IComparable
     {
+
+        public BinaryTree(T data)
+        {
+            this.root = new Node<T>(data);
+        }
+
+        public BinaryTree(Node<T> root)
+        {
+            this.root = root;
+
+            _numberOfNodes = Count;
+        }
+
+
         /**
          * @brief Standard return for each function.
          */
@@ -32,81 +50,100 @@ namespace BinaryTreeFinal
          * 
          */
         protected Node<T> root;
-        protected int _numberOfNodes = 0;
-        protected int _heightOfNodes = 0;
 
-        public BinaryTree(Node<T> root)
-        {
-            this.root = root;
-            _count(ref _numberOfNodes, ref root);
-        }
+        /**
+         * @brief Used as a cache, will be set to -1 if a node change has occured.
+         * For inserting or removing a single item, the counter can be updated accordingly.
+         * However if a tree merge or other complex change occurs, setting it to -1 will save future bugs.
+         */
+        protected int _numberOfNodes = -1;
 
-        public BinaryTree(T data)
-        {
-            this.root = new Node<T>(data);
-        }
+        /**
+         * @brief Used as a cache, will be set to -1 if a node change has occured.
+         * If a change happens, this will be set to -1. Once re-calculated, this will be updated for future
+         * reference.
+         */
+        protected int _heightOfNodes = -1;
 
-        private void _count(ref int returnVal, ref Node<T> nextNode)
-        {
-            returnVal += 1;
-
-            if (nextNode.Left != null)  _count(ref returnVal, ref nextNode.Left);
-            if (nextNode.Right != null) _count(ref returnVal, ref nextNode.Right);
-        }
 
         public int Count
         {
-            get => _numberOfNodes;
+            get
+            {
+                if (_numberOfNodes == -1)
+                {
+                    _numberOfNodes = root.Count(ref root);
+                }
+
+                return _numberOfNodes;
+            }
         }
 
-        public int Height => root.Height();
-        /*()
+        public int Height
         {
-            return root.Height();
-        }*/
+            get
+            {
+                if (_heightOfNodes == -1)
+                {
+                    _heightOfNodes = root.Height();
+                }
 
-
-
-        public bool Contains(T item)
-        {
-            return _contains(item, root);
+                return _heightOfNodes;
+            }
         }
 
         protected bool _contains(T search, Node<T> rootElement)
         {
             return rootElement.Data.Equals(search) || (_contains(search, root.Left) || _contains(search, root.Right));
         }
-        
-        public virtual void Copy(BinaryTree<T> tree)
+
+        public bool Contains(T item)
         {
-            // throw new NotImplementedException();
-            _copy(ref root, tree.root);
+            return _contains(item, root);
         }
 
         protected virtual void _copy(ref Node<T> target, Node<T> source)
         {
-            if (source != null)
-            {
-                target = new Node<T>(source.Data);
-                
-                _copy(ref target.Left, source.Left);
-                _copy(ref target.Right, source.Right);
-            }
-        }
-        
-        public virtual ReturnCode InsertItem(T item)
-        {
-            throw new NotImplementedException();
-            _insertItem(item, ref root);
+            if (source == null) return; //TODO Evaluate my life choices and see if this will let me sleep.
+            target = new Node<T>(source.Data);
+
+            _copy(ref target.Left, source.Left);
+            _copy(ref target.Right, source.Right);
         }
 
+        public virtual void Copy(BinaryTree<T> tree)
+        {
+            _copy(ref root, tree.root);
+        }
+
+        /**
+         * @brief Randomly assigns values within the binary tree.
+         */
         protected virtual ReturnCode _insertItem(T item, ref Node<T> tree)
         {
-            throw new NotImplementedException();
-            
-            
+
+            ref Node<T> selectNode = ref tree.Right;
+
+            if (new Random(23).Next(11) % 2 == 0)
+            {
+                selectNode = ref tree.Left;
+            }
+
+            if (selectNode == null)
+            {
+                selectNode = new Node<T>(item);
+                return ReturnCode.Successful;
+            }
+
+            return _insertItem(item, ref selectNode);
         }
 
+
+        public virtual ReturnCode InsertItem(T item)
+        {
+            _insertItem(item, ref root);
+            return ReturnCode.Successful;
+        }
 
         protected virtual ReturnCode _returnItem(ref Node<T> selectedNode, T removalItem)
         {
@@ -178,17 +215,18 @@ namespace BinaryTreeFinal
         }
 
         /**
-         * 
+         * @brief, prints out the content of the tree, from left to right.
+         * @see Node.ToString()
          */
         public override string ToString()
         {
-            // return GetValues().ToString();
             return root.ToString();
         }
 
 
         public Node<T> GetRoot()
         {
+            //TODO Change to deep clone
             return root.Clone();
         }
     }

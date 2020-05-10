@@ -173,5 +173,25 @@ namespace BinaryTreeFinal
             return returnVal;
         }
 
+        private void _count(ref Node<T> selectedNode, ref int returnCounter)
+        {
+            returnCounter++;
+
+            selectedNode._left?._count(ref selectedNode._left, ref returnCounter);
+            selectedNode._right?._count(ref selectedNode._right, ref returnCounter);
+        }
+
+        /**
+         * @brief Will count the number of 
+         */
+        public int Count(ref Node<T> startNode)
+        {
+            int returnCount = 0;
+
+            _count(ref startNode, ref returnCount);
+
+            return returnCount;
+        }
+
     }
 }

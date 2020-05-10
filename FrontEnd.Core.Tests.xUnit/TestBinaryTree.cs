@@ -42,5 +42,12 @@ namespace FrontEnd.Core.Tests.XUnit
         {
 
         }
+
+        [Fact]
+        public async void ObjectOverrides()
+        {
+
+        }
+
     }
 }
