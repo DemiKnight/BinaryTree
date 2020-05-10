@@ -21,6 +21,10 @@ namespace FrontEnd.Tests.XUnit
             // This test is trivial. Add your own tests for the logic you add to the ViewModel.
             var vm = new MainViewModel();
             Assert.NotNull(vm);
+
+            //Can load files
+            //Updates UI
+            //
         }
 
         // TODO WTS: Add tests for functionality you add to SettingsViewModel.

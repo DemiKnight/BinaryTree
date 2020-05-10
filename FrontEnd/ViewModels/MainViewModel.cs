@@ -10,7 +10,7 @@ namespace FrontEnd.ViewModels
 {
     public class MainViewModel : Screen
     {
-        private String _path = "This is Ttest";
+        private String _path = (String)App.Current.Resources["WordInput_Inital_File"];
         private StorageFile _file;
 
 
